@@ -1,13 +1,20 @@
 def get_sorted_tasks(build_name, tasks, builds):
     sorted_tasks = []
-    build = next(
-        (item for item in builds["builds"] if item["name"] == build_name), None
-    )
+
+    build = None
+    for item in builds["builds"]:
+        if item["name"] == build_name:
+            build = item
+            break
     if build:
         task_list = build.get("tasks", [])
         dependencies_map = {}
         for task_name in task_list:
-            task = next((item for item in tasks if item["name"] == task_name), None)
+            task = None
+            for item in tasks:
+                if item["name"] == task_name:
+                    task = item
+                    break
             if task:
                 dependencies = task.get("dependencies", [])
                 dependencies_map[task_name] = dependencies

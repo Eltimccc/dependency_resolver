@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+
 from app.api.validators import (
     validate_build_exists,
     validate_build_request,
@@ -18,9 +19,10 @@ router = APIRouter()
 )
 async def get_tasks(build: str):
     """
-    Список тасок для билда:
-
-    - **build**: название билда из builds/builds.yaml
+    Пример запроса:
+    {
+     "build": "make_tests"
+    }
     """
     validate_build_request(build)
     validate_data()
